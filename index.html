@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru" data-t="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Нурбанк — универсальный банк с 1992 года</title>
+<style>
+:root{--bg:#f5f3ee;--sf:#fff;--tx:#101a30;--mu:#5a6478;--ac:#8f722a;--g:#c5a55a;--ln:#ddd8cb;--nv:#101a30}
+:root[data-t=dark]{--bg:#0b1324;--sf:#13203a;--tx:#f1f3f8;--mu:#a3adc2;--ac:#c5a55a;--ln:#26334f}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font:16px/1.55 Inter,"Segoe UI",Roboto,system-ui,sans-serif;background:var(--bg);color:var(--tx)}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.12}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important}}
+header{position:sticky;top:0;z-index:40;background:var(--nv);color:#f1f3f8;border-bottom:1px solid #26334f;display:flex;align-items:center;gap:10px;padding:12px 5vw}
+.logo{display:flex;align-items:center;gap:10px;font:700 24px Georgia,serif;color:var(--g);margin-right:auto}
+.logo i{width:34px;height:34px;border-radius:8px;background:var(--g);color:var(--nv);display:grid;place-items:center;font:700 20px Georgia,serif}
+nav{display:flex;gap:2px}nav a{padding:8px 11px;border-radius:8px;font-size:15px;color:#c9d0de}nav a:hover,nav a.on{color:var(--g);background:rgba(255,255,255,.07)}
+.ib{background:#13203a;color:#f1f3f8;border:1px solid #2c3b5c;border-radius:10px;padding:8px 12px;box-shadow:0 3px 0 #0a1020;position:relative}
+.ib b{position:absolute;top:-7px;right:-7px;background:var(--g);color:var(--nv);border-radius:99px;font-size:11px;min-width:18px;height:18px;display:grid;place-items:center}
+#bg{display:none}
+@media(max-width:980px){nav{position:fixed;inset:62px 0 auto;background:var(--nv);flex-direction:column;padding:10px 5vw 16px;display:none;border-bottom:1px solid #26334f}nav.o{display:flex}#bg{display:block}}
+.btn{background:var(--g);color:var(--nv);border:0;border-radius:12px;padding:13px 22px;font-weight:700;box-shadow:0 4px 0 #8f742f;display:inline-block}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #8f742f}
+.btn.g{background:#1a2a4a;color:#f1f3f8;border:1px solid #3a4a6e;box-shadow:0 4px 0 #0a1020}
+.btn.s{padding:9px 16px;font-size:14px}
+.wrap{max-width:1180px;margin:auto;padding:0 5vw}
+#top{background:linear-gradient(180deg,#1c2f5e,#2a3c5c 55%,var(--bg));color:#fff;padding:70px 0 60px}
+.eb{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);margin-bottom:14px}
+#top h1{font-size:clamp(38px,6vw,76px);max-width:15ch;margin-bottom:20px}
+#top p{max-width:52ch;color:#cdd5e6;font-size:19px;margin-bottom:28px}
+.stats{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:28px}
+.stats b{display:block;font:700 34px Georgia,serif;color:var(--g)}.stats span{color:#b9c3da;font-size:14px}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:-20px;position:relative}
+.q{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:20px;text-align:left;color:var(--tx);display:block;width:100%}
+.q:hover{border-color:var(--g)}.q i{font-style:normal;color:var(--g);font-size:24px}.q b{display:block;margin-top:6px}.q span{color:var(--mu);font-size:14px}
+section{padding:72px 0 10px}section h2{font-size:clamp(28px,4vw,44px);margin-bottom:22px}
+.eb2{color:var(--ac);font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tabs button{padding:9px 18px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);color:var(--tx)}
+.tabs .on{background:var(--g);color:var(--nv);border-color:var(--g);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:24px}
+.card h3{font-size:21px;margin-bottom:8px}.card p{color:var(--mu)}
+.card ul{padding-left:18px;color:var(--mu);margin:10px 0 18px}
+.rate{font:700 42px Georgia,serif;color:var(--ac);margin:4px 0}
+.card .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.num{font:700 30px Georgia,serif;color:var(--g)}
+.hide{display:none!important}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:22px}@media(max-width:780px){.calc{grid-template-columns:1fr}}
+label{display:block;font-size:14px;font-weight:600;margin:12px 0 5px}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+.res>div{display:flex;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid var(--ln)}.res b{font-size:20px}
+.note{font-size:13px;color:var(--mu);margin-top:12px}.warn{color:#e08a5a}
+.sch{max-height:300px;overflow:auto;margin-top:14px;border:1px solid var(--ln);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--ln)}th{position:sticky;top:0;background:var(--sf)}td:first-child,th:first-child{text-align:left}
+details{background:var(--sf);border:1px solid var(--ln);border-radius:12px;padding:16px 20px;margin-bottom:10px}summary{font-weight:600;cursor:pointer}details p{color:var(--mu);margin-top:8px}
+.srch{max-width:420px;margin-bottom:18px}
+.about{max-width:70ch;color:var(--mu)}.lic{margin-top:14px;font-size:14px;color:var(--mu)}
+footer{margin-top:80px;background:var(--nv);color:#c9d0de;padding:46px 0 26px;font-size:14px}footer a{display:block;padding:3px 0;opacity:.85}footer a:hover{color:var(--g)}
+.sec-note{margin-top:26px;font-size:13px;opacity:.75}
+dialog{border:1px solid var(--ln);border-radius:18px;padding:26px;width:min(480px,94vw);background:var(--sf);color:var(--tx)}dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h3{font-size:24px;margin-bottom:6px}
+.app{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--ln)}.app small{color:var(--mu);display:block}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);background:var(--g);color:var(--nv);padding:12px 20px;border-radius:12px;font-weight:600;opacity:0;transition:.3s;z-index:90;pointer-events:none}#toast.s{opacity:1;transform:translate(-50%,0)}
+#up{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;border:1px solid #2c3b5c;background:var(--nv);color:var(--g);font-size:20px;display:none;z-index:30}
+.err{color:#e08a5a;font-size:13px;margin-top:4px}
+
+#pb{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,var(--g),#fff0b8);transform-origin:left;transform:scaleX(0);z-index:60}
+#top{position:relative;overflow:hidden}#top .wrap{position:relative;z-index:1}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.38;animation:dr 14s ease-in-out infinite alternate;translate:0 calc(var(--sy,0)*.25px)}
+.o1{width:380px;height:380px;background:#c5a55a;left:-80px;top:40px}.o2{width:460px;height:460px;background:#3d5bd6;right:-120px;bottom:-60px;animation-delay:-6s}
+@keyframes dr{to{transform:translate(60px,40px) scale(1.15)}}
+.hc{position:absolute;right:5vw;top:20px;perspective:1000px}
+.fl{animation:fl 6s ease-in-out infinite}@keyframes fl{50%{transform:translateY(-14px)}}
+.nd{display:block}.na{background:none;border:0;color:#c9d0de;padding:8px 11px;border-radius:8px;font-size:15px}
+.nd:hover .na,.nd.open .na{color:var(--g);background:rgba(255,255,255,.07)}
+.mega{display:none;position:absolute;left:5vw;right:5vw;top:100%;background:var(--nv);border:1px solid #26334f;border-radius:0 0 20px 20px;padding:24px 28px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:22px;transform-origin:top;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.nd:hover .mega,.nd.open .mega{display:grid;animation:mg .3s}.nd.cl .mega{display:none!important}
+@keyframes mg{from{opacity:0;transform:perspective(900px) rotateX(-8deg) translateY(-8px)}}
+.mega h4{font:600 16px Georgia,serif;color:var(--g);padding-bottom:8px;border-bottom:1px solid #26334f;margin-bottom:6px}
+.mega a{display:block;padding:5px 0;color:#c9d0de;font-size:14px;transition:transform .2s}.mega a:hover{color:#fff;transform:translateX(5px);background:none}
+nav .ph{margin-left:6px;color:var(--g);font-weight:600}
+@media(max-width:980px){nav{max-height:80vh;overflow:auto}.mega{position:static;grid-template-columns:1fr;box-shadow:none;border:0;padding:6px 0 10px 12px;animation:none!important}.nd:hover .mega{display:none}.nd.open .mega{display:grid}.hc{position:static;margin:34px 0 0}}
+.card,.q{position:relative;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s,border-color .2s}
+.grid>.card::after,.q::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(197,165,90,.16),transparent 55%)}
+.grid>.card:hover::after,.q:hover::after{opacity:1}
+.grid,.quick{perspective:1200px}
+.rv{opacity:0;translate:0 40px;rotate:1 0 0 14deg;transition:opacity .7s,translate .7s,rotate .7s,transform .2s,border-color .2s;transition-delay:var(--d,0s),var(--d,0s),var(--d,0s),0s,0s}
+.rv.in{opacity:1;translate:0 0;rotate:1 0 0 0deg}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;translate:none;rotate:none;transition:none}}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;perspective:1200px}
+.cw{display:block;text-align:center}.cw b{display:block;margin-top:14px}
+.vc{position:relative;width:min(340px,100%);aspect-ratio:1.586;border-radius:20px;color:#fff;transform-style:preserve-3d;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .18s;box-shadow:0 24px 40px rgba(0,0,0,.4);overflow:hidden;margin:auto;text-align:left}
+.vc::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,30%) var(--my,20%),rgba(255,255,255,.35),transparent 55%);mix-blend-mode:overlay}
+.vc.g{background:linear-gradient(135deg,#d6b755,#8f742f)}.vc.p{background:linear-gradient(135deg,#dfe2e8,#8c93a3);color:#1d2538}.vc.i{background:linear-gradient(135deg,#34395a,#11152a)}.vc.d{background:linear-gradient(135deg,#34a0f0,#14509a)}
+.vc span,.vc small{position:absolute;transform:translateZ(30px)}
+.vn{top:18px;left:20px;font:800 16px Inter,sans-serif;letter-spacing:.08em}.chip{top:64px;left:20px;width:46px;height:34px;border-radius:7px;background:linear-gradient(135deg,#f4e29a,#b99a3e)}
+.vnum{bottom:56px;left:20px;font:600 18px monospace;letter-spacing:.12em}.vv{bottom:14px;right:20px;font:italic 800 30px Georgia,serif}.vc small{bottom:16px;left:20px;font-size:12px;opacity:.85;max-width:50%}
+.big{margin:10px 0 34px}
+.pg{padding:46px 0 10px;animation:pi .6s}@keyframes pi{from{opacity:0;transform:perspective(1200px) rotateY(-9deg) translateX(40px)}}
+.bc{color:var(--mu);font-size:14px;margin-bottom:14px}.bc a:hover{color:var(--g)}
+.pg h1{font-size:clamp(32px,5vw,58px);margin-bottom:12px}.pg h2{font-size:26px;margin:34px 0 14px}.lead{color:var(--mu);max-width:60ch;margin-bottom:26px;font-size:18px}
+.acts{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 10px}.rel{display:flex;flex-wrap:wrap;gap:10px}
+.rel a{padding:9px 16px;border:1px solid var(--ln);border-radius:99px;background:var(--sf);transition:.2s}.rel a:hover{border-color:var(--g);color:var(--g);transform:translateY(-3px)}
+.btn{transition:transform .15s,box-shadow .15s}.btn:hover{transform:translateY(-2px)}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#top"><i>N</i>Нурбанк</a>
+  <nav id="nv"><!--
+    <a href="#products">Продукты</a><a href="#calc">Калькуляторы</a><a href="#transfers">Переводы</a><a href="#business">Бизнесу</a><a href="#about">О банке</a><a href="#faq">Вопросы</a><a href="#contacts">Контакты</a>
+  --></nav>
+  <button class="ib" id="apps" aria-label="Мои заявки">Заявки<b id="cnt" class="hide">0</b></button>
+  <button class="ib" id="th" aria-label="Сменить тему">◐</button>
+  <button class="ib" id="bg" aria-label="Меню">☰</button>
+</header><div id="pb"></div><div id="home">
+
+<div id="top"><i class="orb o1"></i><i class="orb o2"></i><div class="wrap">
+  <div class="eb">Универсальный банк · с 1992 года</div>
+  <h1>Надёжный банк для вашего капитала и бизнеса</h1>
+  <p>Депозиты, кредиты, международные переводы и цифровой банкинг Nur24.kz — в одном месте, с поддержкой 24/7.</p>
+  <a class="btn" href="#calc">Рассчитать выгоду</a> <a class="btn g" href="#products">Все продукты</a>
+  <div class="stats">
+    <div><b class="c" data-to="564">0</b><span>млрд ₸ · Активы</span></div>
+    <div><b class="c" data-to="486">0</b><span>млрд ₸ · Депозиты</span></div>
+    <div><b class="c" data-to="16">0</b><span>филиалов</span></div>
+    <div><b class="c" data-to="30" data-s="+">0</b><span>лет на рынке</span></div>
+  </div>
+</div></div>
+
+<div class="wrap quick">
+  <button class="q" data-go="dep"><i>◈</i><b>Открыть депозит</b><span>Ставки до 18,4%</span></button>
+  <button class="q" data-go="loan"><i>▣</i><b>Получить кредит</b><span>Решение онлайн</span></button>
+  <a class="q" href="#transfers"><i>⇄</i><b>Перевод за рубеж</b><span>Более 190 стран</span></a>
+  <button class="q" id="lost"><i>☏</i><b>Связаться: 2552</b><span>Бесплатно, 24/7</span></button>
+</div>
+
+<main class="wrap">
+<section id="calc">
+  <div class="eb2">Калькуляторы</div><h2>Рассчитайте условия за минуту</h2>
+  <div class="tabs" id="ct"><button class="on" data-k="dep">Депозит</button><button data-k="loan">Кредит</button></div>
+  <div class="calc">
+    <div class="card" id="cin"></div>
+    <div class="card"><div class="res" id="cout"></div><div class="note" id="cn"></div>
+      <div class="row"><button class="btn s" id="capp">Оставить заявку</button><button class="btn g s" id="csch">Показать график платежей</button></div>
+      <div class="sch hide" id="sch"></div></div>
+  </div>
+  <p class="note">Расчёт ориентировочный и не является офертой. Актуальные условия уточняйте в банке.</p>
+</section>
+
+<section id="products">
+  <div class="eb2">Частным клиентам</div><h2>Продукты банка</h2>
+  <div class="tabs" data-f="products"><button class="on" data-t="all">Все</button><button data-t="dep">Депозиты</button><button data-t="loan">Кредиты</button></div>
+  <div class="grid" id="pg">
+    <div class="card" data-tag="dep"><h3>Депозит «Нур Алтын Оптимальный»</h3><div class="rate">14,9%</div><ul><li>Пополнение и снятие в любой момент</li><li>Капитализация процентов</li><li>От 5 000 ₸, срок 1–12 мес.</li></ul><div class="row"><button class="btn s" data-calc="dep" data-r="14.9" data-cap="1">Рассчитать</button><button class="btn g s" data-app="Депозит «Нур Алтын Оптимальный»">Заявка</button></div></div>
+    <div class="card" data-tag="dep"><h3>Депозит «Нур Алтын Сберегательный»</h3><div class="rate">18,4%</div><ul><li>Максимальная гарантия ставки</li><li>Без пополнения и снятия</li><li>От 5 000 ₸, срок 1–12 мес.</li></ul><div class="row"><button class="btn s" data-calc="dep" data-r="18.4" data-cap="0">Рассчитать</button><button class="btn g s" data-app="Депозит «Нур Алтын Сберегательный»">Заявка</button></div></div>
+    <div class="card" data-tag="loan"><h3>Залоговый кредит</h3><div class="rate">от 23,5%</div><ul><li>Сумма до 70 000 000 ₸</li><li>Срок до 120 месяцев</li><li>Ипотека и автокредит</li></ul><div class="row"><button class="btn s" data-calc="loan" data-r="23.5">Рассчитать</button><button class="btn g s" data-app="Залоговый кредит">Заявка</button></div></div>
+  </div>
+  <p class="note">Ставки приведены по данным открытых источников; точные условия — на nurbank.kz.</p>
+</section>
+
+<section id="cards"><div class="eb2">Карты</div><h2>Карты Нурбанка</h2><div class="vgrid" id="vg"></div><p class="note">Нажмите на карту, чтобы узнать подробности. <a href="#/cards" style="color:var(--g)">Все карты</a></p></section>
+
+<section id="transfers">
+  <div class="eb2">Переводы</div><h2>Деньги — быстро и по всему миру</h2>
+  <div class="tabs" data-f="transfers"><button class="on" data-t="all">Все</button><button data-t="app">В приложении</button><button data-t="branch">В отделении</button><button data-t="abroad">За рубеж</button><button data-t="kz">По Казахстану</button></div>
+  <div class="grid" id="tg">
+    <div class="card" data-tag="app abroad"><h3>Золотая Корона</h3><p>Россия, страны СНГ, Европа. Валюты KZT, USD, EUR, RUB. Получение прямо в приложении Nur24.kz.</p><div class="row"><button class="btn g s" data-app="Перевод: Золотая Корона">Оформить</button></div></div>
+    <div class="card" data-tag="app abroad"><h3>Ria Money Transfer</h3><p>Более 190 стран и 500 000+ пунктов обслуживания. Отправка из Nur24.kz.</p><div class="row"><button class="btn g s" data-app="Перевод: Ria Money Transfer">Оформить</button></div></div>
+    <div class="card" data-tag="app kz"><h3>NUR Express</h3><p>Переводы по Казахстану за секунды, без открытия счёта. До 10 000 USD в эквиваленте.</p><div class="row"><button class="btn g s" data-app="Перевод: NUR Express">Оформить</button></div></div>
+    <div class="card" data-tag="branch abroad"><h3>Western Union</h3><p>В отделениях банка, по документу, удостоверяющему личность.</p><div class="row"><button class="btn g s" data-app="Перевод: Western Union">Оформить</button></div></div>
+    <div class="card" data-tag="abroad"><h3>SWIFT</h3><p>Банковские переводы в любую точку мира.</p><div class="row"><button class="btn g s" data-app="Перевод: SWIFT">Оформить</button></div></div>
+    <div class="card" data-tag="app kz"><h3>По номеру телефона</h3><p>В другие банки Казахстана по номеру телефона или карты в Nur24.kz.</p><div class="row"><button class="btn g s" data-app="Перевод по номеру телефона">Оформить</button></div></div>
+  </div>
+</section>
+
+<section id="business">
+  <div class="eb2">Бизнесу</div><h2>Решения для предпринимателей</h2>
+  <div class="grid">
+    <div class="card"><div class="num">01</div><h3>Расчётно-кассовое обслуживание</h3><p>Счета, платежи, интернет-банкинг Nur Business с круглосуточным доступом.</p><div class="row"><button class="btn s" data-app="Расчётно-кассовое обслуживание">Открыть счёт</button></div></div>
+    <div class="card"><div class="num">02</div><h3>Кредитование и господдержка</h3><p>Участие в государственных программах поддержки казахстанских предпринимателей.</p><div class="row"><button class="btn s" data-app="Кредитование бизнеса и господдержка">Подать заявку</button></div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="eb2">О банке</div><h2>Нурбанк сегодня</h2>
+  <p class="about">АО «Нурбанк» работает на рынке Казахстана с 1992 года. Банк предлагает полный спектр услуг для частных и корпоративных клиентов, развивает цифровые каналы и имеет сеть из 16 филиалов и центров обслуживания по всей стране.</p>
+  <p class="lic">Лицензия АРРФР № 1.2.15/193 от 03.02.2020 · БИН 930940000164 · SWIFT NBRKKZKX</p>
+</section>
+
+<section id="faq">
+  <div class="eb2">Вопросы и ответы</div><h2>Частые вопросы</h2>
+  <input class="srch" id="fs" placeholder="Поиск по вопросам" aria-label="Поиск по вопросам">
+  <div id="fl">
+    <details><summary>Как стать клиентом?</summary><p>Обратитесь в любое отделение с документом, удостоверяющим личность, или установите приложение Nur24.kz.</p></details>
+    <details><summary>Застрахованы ли вклады?</summary><p>Банк участвует в системе гарантирования депозитов. Условия — на сайте КФГД.</p></details>
+    <details><summary>Что делать при утере карты?</summary><p>Позвоните по номеру 2552 или +7 (727) 250-67-27 для немедленной блокировки.</p></details>
+    <details><summary>Что нельзя сообщать сотрудникам банка?</summary><p>Сотрудники банка никогда не запрашивают CVV-код, пароли и коды из SMS. Не сообщайте их никому.</p></details>
+  </div>
+  <p class="note hide" id="fe">Ничего не найдено. Позвоните по номеру 2552 — бесплатно, круглосуточно.</p>
+</section>
+
+<section id="contacts">
+  <div class="eb2">Контакты</div><h2>Мы на связи круглосуточно</h2>
+  <div class="grid">
+    <div class="card"><h3>2552</h3><p>Бесплатно, 24/7</p><div class="row"><a class="btn s" href="tel:2552">Позвонить</a><button class="btn g s" data-copy="2552">Копировать</button></div></div>
+    <div class="card"><h3>+7 (727) 244-44-44</h3><p>Головной офис</p><div class="row"><a class="btn s" href="tel:+77272444444">Позвонить</a><button class="btn g s" data-copy="+7 (727) 244-44-44">Копировать</button></div></div>
+    <div class="card"><h3>WhatsApp</h3><p>+7 707 000 25 52</p><div class="row"><a class="btn s" href="https://wa.me/77070002552" target="_blank" rel="noopener">Написать</a></div></div>
+    <div class="card"><h3>Адрес и почта</h3><p>г. Алматы, пр. Абая, 10 «В»<br>cc_nur@nurbank.kz</p><div class="row"><a class="btn s" href="mailto:cc_nur@nurbank.kz">Написать</a><button class="btn g s" data-app="Обратная связь">Заявка</button></div></div>
+  </div>
+</section>
+</main>
+
+</div><div id="sub" class="hide"></div><footer><div class="wrap">
+  <div class="grid">
+    <div><b style="font:700 20px Georgia;color:#c5a55a">Нурбанк</b><br>г. Алматы, пр. Абая, 10 «В»<br>cc_nur@nurbank.kz</div>
+    <div><b>Клиентам</b><a href="#products">Продукты</a><a href="#transfers">Переводы</a><a href="#/cards">Карты</a><a href="#/fx">Курс валют</a><a href="#calc">Калькуляторы</a><a href="https://nurbank.kz" target="_blank" rel="noopener">Интернет-банкинг</a></div>
+    <div><b>Для физлиц и бизнеса</b><a href="#products">Для физлиц</a><a href="#business">Для бизнеса</a><a href="https://nurbank.kz" target="_blank" rel="noopener">nurbank.kz</a></div>
+    <div><b>Круглосуточно</b>2552 (бесплатно)<br>+7 (727) 244-44-44<br>WhatsApp +7 707 000 25 52</div>
+  </div>
+  <p class="sec-note">Безопасность: сотрудники банка никогда не запрашивают CVV-код, пароли и коды из SMS. Не сообщайте их никому.<br>© АО «Нурбанк». Концептуальный редизайн. Не является официальным сайтом банка.</p>
+</div></footer>
+
+<button id="up" aria-label="Наверх">↑</button><div id="toast" role="status"></div>
+
+<dialog id="dg"><h3>Заявка в банк</h3><p class="note" style="margin:0 0 6px">Заявка сохранится в этом браузере. Банк свяжется с вами.</p>
+ <form id="fm"><label>Продукт<select id="fp"></select></label><label>Имя<input id="fn" autocomplete="name"></label><label>Телефон<input id="fh" type="tel" placeholder="+7 (___) ___-__-__" autocomplete="tel"></label><label>Комментарий<textarea id="fc" rows="2"></textarea></label>
+ <label style="font-weight:400"><input type="checkbox" id="fa" style="width:auto"> Согласен на обработку персональных данных</label><div class="err" id="fe2"></div>
+ <div class="row" style="display:flex;gap:10px;margin-top:16px"><button class="btn" type="submit">Отправить заявку</button><button class="btn g" type="button" id="fx">Закрыть</button></div></form></dialog>
+<dialog id="dl"><h3>Мои заявки</h3><div id="al"></div><div style="margin-top:16px"><button class="btn g s" id="lx">Закрыть</button></div></dialog>
+<dialog id="dk"><h3>Связаться с банком</h3><p class="note" style="margin:0 0 14px">Потеряли карту — звоните сразу, блокировка бесплатная.</p><div class="row" style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="tel:2552">2552</a><a class="btn g" href="tel:+77272506727">+7 (727) 250-67-27</a></div><p class="note">Не сообщайте CVV-код, пароли и коды из SMS никому.</p><div style="margin-top:14px"><button class="btn g s" id="kx">Закрыть</button></div></dialog>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const fmt=n=>Math.round(n).toLocaleString('ru-RU')+' ₸';
+const st={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+let tt;const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('s');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('s'),2400)};
+const go=id=>{if(!$('#home').classList.contains('hide'))$(id).scrollIntoView();else location.hash=id};
+// theme & menu
+document.documentElement.dataset.t=st.get('theme','dark');
+$('#th').onclick=()=>{const d=document.documentElement,v=d.dataset.t=='dark'?'light':'dark';d.dataset.t=v;st.set('theme',v)};
+$('#bg').onclick=()=>$('#nv').classList.toggle('o');
+
+// scroll spy, to-top
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)$$('nav>a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')=='#'+x.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+$$('section').forEach(s=>io.observe(s));
+addEventListener('scroll',()=>$('#up').style.display=scrollY>600?'block':'none',{passive:true});
+$('#up').onclick=()=>scrollTo({top:0});
+// counters
+$$('.c').forEach(el=>{const to=+el.dataset.to,s=el.dataset.s||'',t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1200);el.textContent=Math.round(to*p)+(p==1?s:'');if(p<1)requestAnimationFrame(f)})(t0)});
+// filters
+$$('.tabs[data-f]').forEach(bar=>{const box=$(bar.dataset.f=='products'?'#pg':'#tg');bar.onclick=e=>{const b=e.target.closest('button');if(!b)return;$$('button',bar).forEach(x=>x.classList.toggle('on',x==b));$$('.card',box).forEach(c=>c.classList.toggle('hide',b.dataset.t!='all'&&!c.dataset.tag.split(' ').includes(b.dataset.t)))}});
+// calculators
+let mode='dep';
+const IN={dep:`<h3>Депозит</h3><label>Сумма вклада, ₸<input id="a" type="number" value="1000000" min="5000"></label><label>Срок, мес.<input id="m" type="number" value="12" min="1" max="12"></label><label>Ставка, % годовых<input id="r" type="number" value="14.9" step="0.1"></label><label>Проценты<select id="x"><option value="1">С капитализацией</option><option value="0">Без капитализации</option></select></label>`,
+loan:`<h3>Кредит</h3><label>Сумма, ₸<input id="a" type="number" value="10000000" min="100000" max="70000000"></label><label>Срок, мес.<input id="m" type="number" value="60" min="1" max="120"></label><label>Ставка, % годовых<input id="r" type="number" value="23.5" step="0.1"></label><label>Тип платежа<select id="x"><option value="1">Аннуитетный</option><option value="0">Дифференцированный</option></select></label>`};
+let rows=[],summary='';
+function calc(){
+ const a=+$('#a').value||0,m=Math.max(1,Math.round(+$('#m').value||1)),R=(+$('#r').value||0)/100,i=R/12,x=$('#x').value=='1',w=[];
+ let h,o;
+ if(mode=='dep'){
+  if(a<5000)w.push('Минимальная сумма — 5 000 ₸.');if(m>12)w.push('Срок вклада — от 1 до 12 месяцев.');
+  const t=x?a*Math.pow(1+i,m):a*(1+i*m);
+  o=[['Доход за период',fmt(t-a)],['Итоговая сумма',fmt(t)],['Эффективная ставка',(a?((Math.pow(t/a,12/m)-1)*100).toFixed(2):'0')+'%']];
+  rows=[];let b=a;for(let n=1;n<=m;n++){const p=x?b*i:a*i;rows.push([n,p,b+p]);b=x?b+p:b+p}
+  h=['Месяц','Начислено','Баланс'];summary=`Расчёт депозита: ${fmt(a)}, ${m} мес., ${(R*100).toFixed(1)}%, доход ${fmt(t-a)}`;
+ }else{
+  if(a>7e7)w.push('Максимальная сумма — 70 000 000 ₸.');if(m>120)w.push('Максимальный срок — 120 месяцев.');
+  rows=[];let b=a,tot=0;const ann=i?a*i/(1-Math.pow(1+i,-m)):a/m;
+  for(let n=1;n<=m;n++){const int=b*i,pr=x?ann-int:a/m,pay=int+pr;b=Math.max(0,b-pr);tot+=pay;rows.push([n,pay,int,pr,b])}
+  o=[[x?'Платёж в месяц':'Первый платёж',fmt(rows[0][1])],['Переплата',fmt(tot-a)],['Всего к возврату',fmt(tot)]];
+  h=['Месяц','Платёж','Проценты','Долг','Остаток'];summary=`Расчёт кредита: ${fmt(a)}, ${m} мес., ${(R*100).toFixed(1)}%, ${x?'аннуитет':'дифф.'}, переплата ${fmt(tot-a)}`;
+ }
+ $('#cout').innerHTML=o.map(v=>`<div><span>${v[0]}</span><b>${v[1]}</b></div>`).join('');
+ $('#cn').innerHTML=w.map(t=>`<span class="warn">${t}</span>`).join(' ');
+ $('#sch').innerHTML=`<table><tr>${h.map(t=>`<th>${t}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map((v,k)=>`<td>${k?fmt(v):v}</td>`).join('')}</tr>`).join('')}</table>`;
+}
+function setMode(k,v={}){mode=k;$$('#ct button').forEach(b=>b.classList.toggle('on',b.dataset.k==k));$('#cin').innerHTML=IN[k];$('#sch').classList.add('hide');$('#csch').textContent='Показать график платежей';
+ if(v.r)$('#r').value=v.r;if(v.cap!=null)$('#x').value=v.cap;calc()}
+$('#ct').onclick=e=>{const b=e.target.closest('button');if(b)setMode(b.dataset.k)};
+$('#cin').addEventListener('input',calc);
+$('#csch').onclick=()=>{const h=$('#sch').classList.toggle('hide');$('#csch').textContent=h?'Показать график платежей':'Скрыть график'};
+$('#capp').onclick=()=>openApp(mode=='dep'?'Депозит «Нур Алтын Оптимальный»':'Залоговый кредит',summary);
+$$('[data-go]').forEach(b=>b.onclick=()=>{setMode(b.dataset.go);go('#calc')});
+$$('[data-calc]').forEach(b=>b.onclick=()=>{setMode(b.dataset.calc,{r:b.dataset.r,cap:b.dataset.cap});go('#calc');toast('Условия продукта подставлены в калькулятор')});
+setMode('dep');
+// applications
+const P=['Депозит «Нур Алтын Оптимальный»','Депозит «Нур Алтын Сберегательный»','Залоговый кредит','Перевод: Золотая Корона','Перевод: Ria Money Transfer','Перевод: NUR Express','Перевод: Western Union','Перевод: SWIFT','Перевод по номеру телефона','Расчётно-кассовое обслуживание','Кредитование бизнеса и господдержка','Обратная связь'];
+$('#fp').innerHTML=P.map(p=>`<option>${p}</option>`).join('');
+function openApp(p,note){if(!P.includes(p)){$('#fp').add(new Option(p,p))}$('#fp').value=p;$('#fc').value=note||'';$('#fe2').textContent='';$('#dg').showModal()}
+$$('[data-app]').forEach(b=>b.onclick=()=>openApp(b.dataset.app));
+$('#fx').onclick=()=>$('#dg').close();
+$('#fh').oninput=e=>{let d=e.target.value.replace(/\D/g,'');if(/^[78]/.test(d))d=d.slice(1);d=d.slice(0,10);let s='+7';if(d.length)s+=' ('+d.slice(0,3);if(d.length>=3)s+=') '+d.slice(3,6);if(d.length>=6)s+='-'+d.slice(6,8);if(d.length>=8)s+='-'+d.slice(8,10);e.target.value=d?s:''};
+$('#fm').onsubmit=e=>{e.preventDefault();const n=$('#fn').value.trim(),h=$('#fh').value,er=$('#fe2');
+ if(n.length<2)return er.textContent='Укажите имя.';if(h.replace(/\D/g,'').length<11)return er.textContent='Введите телефон полностью.';if(!$('#fa').checked)return er.textContent='Подтвердите согласие на обработку данных.';
+ const l=st.get('apps',[]);l.unshift({id:Date.now(),p:$('#fp').value,n,h,c:$('#fc').value,d:new Date().toLocaleString('ru-RU')});st.set('apps',l);
+ $('#dg').close();$('#fm').reset();badge();toast('Заявка принята. Банк свяжется с вами.')};
+function badge(){const n=st.get('apps',[]).length;$('#cnt').textContent=n;$('#cnt').classList.toggle('hide',!n)}
+function list(){const l=st.get('apps',[]);$('#al').innerHTML=l.length?l.map(a=>`<div class="app"><div><b>${a.p}</b><small>${a.d} · ${a.n}, ${a.h}</small>${a.c?`<small>${a.c}</small>`:''}<small style="color:var(--g)">Статус: принята</small></div><button class="btn g s" data-del="${a.id}">Удалить</button></div>`).join(''):'<p class="note">Заявок пока нет. Выберите продукт и нажмите «Заявка».</p>'}
+$('#apps').onclick=()=>{list();$('#dl').showModal()};$('#lx').onclick=()=>$('#dl').close();
+$('#al').onclick=e=>{const b=e.target.closest('[data-del]');if(!b)return;st.set('apps',st.get('apps',[]).filter(a=>a.id!=b.dataset.del));list();badge()};
+badge();
+// contacts, faq
+$('#lost').onclick=()=>$('#dk').showModal();$('#kx').onclick=()=>$('#dk').close();
+$$('[data-copy]').forEach(b=>b.onclick=()=>{const v=b.dataset.copy;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast('Скопировано: '+v),()=>toast(v))});
+$('#fs').oninput=e=>{const q=e.target.value.toLowerCase();let n=0;$$('#fl details').forEach(d=>{const ok=d.textContent.toLowerCase().includes(q);d.classList.toggle('hide',!ok);if(ok)n++;if(q&&ok)d.open=true});$('#fe').classList.toggle('hide',!!n)};
+
+// ===== разделы, меню, 3D =====
+const PG={
+loan:['Залоговый кредит','Кредит под залог на любые цели.',['Сумма до 70 000 000 ₸','Срок до 120 месяцев','Ставка от 23,5%'],'Залоговый кредит','calc:loan:23.5'],
+mort:['Ипотека','Ипотека оформляется в рамках залогового кредита.',['Сумма до 70 000 000 ₸','Срок до 120 месяцев','Ставка от 23,5%'],'Ипотека','calc:loan:23.5'],
+auto:['Автокредит','Автокредит оформляется в рамках залогового кредита.',['Сумма до 70 000 000 ₸','Срок до 120 месяцев','Ставка от 23,5%'],'Автокредит','calc:loan:23.5'],
+dep1:['Нур Алтын Оптимальный','Гибкий вклад: пополняйте и снимайте деньги в любой момент.',['Ставка 14,9%','Капитализация процентов','От 5 000 ₸, срок 1–12 мес.'],'Депозит «Нур Алтын Оптимальный»','calc:dep:14.9:1'],
+dep2:['Нур Алтын Сберегательный','Вклад с максимальной ставкой: без пополнения и снятия.',['Ставка 18,4%','Максимальная гарантия ставки','От 5 000 ₸, срок 1–12 мес.'],'Депозит «Нур Алтын Сберегательный»','calc:dep:18.4:0'],
+trgk:['Золотая Корона','Переводы в Россию, страны СНГ и Европу.',['Валюты: KZT, USD, EUR, RUB','Получение прямо в приложении Nur24.kz'],'Перевод: Золотая Корона'],
+trria:['Ria Money Transfer','Переводы более чем в 190 стран.',['500 000+ пунктов обслуживания','Отправка из Nur24.kz'],'Перевод: Ria Money Transfer'],
+trnur:['NUR Express','Переводы по Казахстану за секунды.',['Без открытия счёта','До 10 000 USD в эквиваленте'],'Перевод: NUR Express'],
+trwu:['Western Union','Переводы в отделениях банка.',['По документу, удостоверяющему личность'],'Перевод: Western Union'],
+trswift:['SWIFT','Банковские переводы в любую точку мира.',['Реквизиты банка: SWIFT NBRKKZKX'],'Перевод: SWIFT'],
+trphone:['По номеру телефона','Переводы в другие банки Казахстана.',['По номеру телефона или карты','В приложении Nur24.kz'],'Перевод по номеру телефона'],
+cards:['Дебетовые карты','Карты Visa Нурбанка: выберите уровень и дизайн.',['VISA Gold, Platinum и Infinite','Карта с индивидуальным дизайном','Бесконтактная оплата телефоном и часами'],'Дебетовая карта','cards'],
+vgold:['VISA Gold','Дебетовая карта уровня Gold.',['Бесконтактная оплата','Можно подключить к Google Pay, Apple Pay, Samsung Pay и Garmin Pay'],'Карта VISA Gold','card:gold'],
+vplat:['VISA Platinum','Дебетовая карта уровня Platinum.',['Бесконтактная оплата','Тарифы — в разделе «Тарифы»'],'Карта VISA Platinum','card:plat'],
+vinf:['VISA Infinite','Дебетовая карта уровня Infinite.',['Бесконтактная оплата','Тарифы — в разделе «Тарифы»'],'Карта VISA Infinite','card:inf'],
+cdesign:['Карта с индивидуальным дизайном','Карта Visa с дизайном, который выберете вы.',['Условия и варианты дизайна уточняйте в банке'],'Карта с индивидуальным дизайном','card:design'],
+tariffs:['Тарифы','Тарифы на карты и услуги банка.',['Актуальные тарифы — на nurbank.kz','Уточнить можно по телефону 2552'],''],
+docs:['Документы','Договоры, правила и формы банка.',['Актуальные документы — на nurbank.kz'],''],
+gpay:['Google Pay','Оплата смартфоном с картой Нурбанка.',['Бесконтактная оплата в магазинах','Порядок подключения — на nurbank.kz или по телефону 2552'],'Подключение Google Pay'],
+apay:['Apple Pay','Оплата iPhone или Apple Watch с картой Нурбанка.',['Бесконтактная оплата в магазинах','Порядок подключения — на nurbank.kz или по телефону 2552'],'Подключение Apple Pay'],
+spay:['Samsung Pay','Оплата смартфоном Samsung с картой Нурбанка.',['Бесконтактная оплата в магазинах','Порядок подключения — на nurbank.kz или по телефону 2552'],'Подключение Samsung Pay'],
+garmin:['Garmin Pay','Оплата часами Garmin с картой Нурбанка.',['Бесконтактная оплата в магазинах','Порядок подключения — на nurbank.kz или по телефону 2552'],'Подключение Garmin Pay'],
+cashback:['Программа «Cashback»','Программа лояльности: возврат части расходов по карте.',['Условия и размер возврата — на nurbank.kz'],'Программа «Cashback»'],
+nurclub:['Дисконтный клуб «Nur Club»','Скидки и привилегии у партнёров банка.',['Список партнёров и скидок — на nurbank.kz'],'Дисконтный клуб «Nur Club»'],
+promos:['Акции','Актуальные предложения банка.',['Действующие акции публикуются на nurbank.kz'],''],
+fx:['Курс валют','Конвертер по курсу, который вы введёте.',['Курсы банка — на nurbank.kz','Расчёт ориентировочный'],'','fx'],
+nur24:['Интернет-банкинг Nur24.kz','Банк в приложении, 24/7.',['Переводы Золотая Корона и Ria','Переводы по номеру телефона или карты','Получение переводов'],''],
+block:['Блокировка карты','Если карту потеряли — звоните сразу.',['2552 — бесплатно, круглосуточно','+7 (727) 250-67-27'],'','tel'],
+security:['Безопасность','Не сообщайте никому CVV-код, пароли и коды из SMS.',['Сотрудники банка никогда не запрашивают эти данные','Сомневаетесь — позвоните по номеру 2552'],''],
+rko:['Расчётно-кассовое обслуживание','Счета и платежи для бизнеса.',['Счета и платежи','Интернет-банкинг Nur Business с круглосуточным доступом'],'Расчётно-кассовое обслуживание'],
+nurbiz:['Nur Business','Интернет-банкинг для предпринимателей.',['Круглосуточный доступ'],'Расчётно-кассовое обслуживание'],
+bizloan:['Кредитование и господдержка','Участие в государственных программах поддержки казахстанских предпринимателей.',['Консультация — по телефону 2552'],'Кредитование бизнеса и господдержка'],
+lic:['Реквизиты и лицензия','Данные АО «Нурбанк».',['Лицензия АРРФР № 1.2.15/193 от 03.02.2020','БИН 930940000164','SWIFT NBRKKZKX','г. Алматы, пр. Абая, 10 «В»'],''],
+branches:['Филиалы','Сеть из 16 филиалов и центров обслуживания по всей стране.',['Головной офис: г. Алматы, пр. Абая, 10 «В»','Телефон: +7 (727) 244-44-44','Полный список отделений — на nurbank.kz'],'','map']};
+const MENU=[{t:'Частным клиентам',c:[
+{h:'Кредиты',l:['loan','mort','auto',['calc:loan','Калькулятор кредита']]},
+{h:'Депозиты',l:['dep1','dep2',['calc:dep','Калькулятор вклада']]},
+{h:'Переводы',l:['trgk','trria','trnur','trwu','trswift','trphone']},
+{h:'Дебетовые карты',k:'cards',l:['vgold','vplat','vinf','cdesign','tariffs','docs']},
+{h:'Бесконтактная оплата',l:['gpay','apay','spay','garmin']},
+{h:'Лояльность и акции',l:['cashback','nurclub','promos','fx']},
+{h:'Другие услуги',l:['nur24','block','security']}]},
+{t:'Бизнесу',c:[{h:'Для бизнеса',l:['rko','nurbiz','bizloan',['#business','Все решения']]}]},
+{t:'О банке',c:[{h:'Нурбанк',l:[['#about','О Нурбанке'],'lic','branches',['#faq','Вопросы и ответы'],['#contacts','Контакты']]}]}];
+const kk=x=>Array.isArray(x)?x[0]:x,lb=x=>Array.isArray(x)?x[1]:PG[x][0];
+const hr=x=>{const k=kk(x);return k[0]=='#'?k:k.startsWith('calc:')?'#calc':'#/'+k},dm=x=>kk(x).startsWith('calc:')?`data-mode="${kk(x).slice(5)}"`:'';
+$('#nv').innerHTML=MENU.map(m=>`<div class="nd"><button class="na">${m.t} ▾</button><div class="mega">${m.c.map(c=>`<div><h4>${c.k?`<a href="#/${c.k}">${c.h}</a>`:c.h}</h4>${c.l.map(x=>`<a href="${hr(x)}" ${dm(x)}>${lb(x)}</a>`).join('')}</div>`).join('')}</div></div>`).join('')+'<a href="#calc">Калькуляторы</a><a href="#contacts">Контакты</a><a class="ph" href="tel:2552">☏ 2552</a>';
+$('#nv').addEventListener('click',e=>{const b=e.target.closest('.na');if(b){const n=b.parentNode,o=n.classList.contains('open');$$('.nd').forEach(x=>x.classList.remove('open'));n.classList.toggle('open',!o);return}
+ const a=e.target.closest('a');if(a){$('#nv').classList.remove('o');const n=a.closest('.nd');if(n){n.classList.remove('open');n.classList.add('cl');n.addEventListener('mouseleave',()=>n.classList.remove('cl'),{once:true})}}});
+document.addEventListener('click',e=>{if(!e.target.closest('.nd'))$$('.nd.open').forEach(x=>x.classList.remove('open'));
+ const b=e.target.closest('[data-mode]');if(b){e.preventDefault();setMode(b.dataset.mode,{r:b.dataset.r||undefined,cap:b.dataset.cap||undefined});go('#calc')}
+ const d=e.target.closest('#sub [data-app]');if(d)openApp(d.dataset.app)});
+// карты
+const CT={gold:['g','Gold','VISA Gold','vgold'],plat:['p','Platinum','VISA Platinum','vplat'],inf:['i','Infinite','VISA Infinite','vinf'],design:['d','Свой дизайн','Карта с индивидуальным дизайном','cdesign']};
+const vcH=t=>`<div class="vc ${CT[t][0]} tilt"><span class="vn">▲ NURBANK</span><span class="chip"></span><span class="vnum">0000 0000 0000 0001</span><span class="vv">VISA</span><small>${CT[t][1]}</small></div>`;
+const cardH=t=>`<a class="cw" href="#/${CT[t][3]}">${vcH(t)}<b>${CT[t][2]}</b></a>`;
+$('#vg').innerHTML=['gold','plat','inf','design'].map(cardH).join('');
+const fxH=()=>`<div class="card fx" style="max-width:460px;margin-bottom:26px"><label>Валюта<select id="xc"><option>USD</option><option>EUR</option><option>RUB</option></select></label><label>Направление<select id="xd"><option value="0">Валюта → ₸</option><option value="1">₸ → валюта</option></select></label><label>Сумма<input id="xa" type="number" value="100"></label><label>Курс, ₸ за 1 единицу валюты<input id="xr" type="number" step="0.01" placeholder="Введите курс банка"></label><div class="res"><div><span>Результат</span><b id="xo">Введите курс</b></div></div></div>`;
+$('#sub').addEventListener('input',e=>{if(!e.target.closest('.fx'))return;const a=+$('#xa').value,r=+$('#xr').value;$('#xo').textContent=r>0?($('#xd').value=='0'?fmt(a*r):(a/r).toLocaleString('ru-RU',{maximumFractionDigits:2})+' '+$('#xc').value):'Введите курс'});
+// страница раздела
+function showSub(k){const p=PG[k];if(!p){location.hash='';return}
+ let top='',sib=[];MENU.forEach(m=>m.c.forEach(c=>{if(c.l.some(x=>kk(x)==k)){top=m.t;sib=c.l}}));
+ if(k=='cards'){top='Частным клиентам';sib=['vgold','vplat','vinf','cdesign']}
+ const [t,lead,pts,prod,ex]=p,e=(ex||'').split(':');
+ const x=k=='cards'?`<div class="vgrid">${['gold','plat','inf','design'].map(cardH).join('')}</div>`:e[0]=='card'?`<div class="big">${vcH(e[1])}</div>`:e[0]=='fx'?fxH():'';
+ const acts=(prod?`<button class="btn" data-app="${prod}">Оставить заявку</button>`:'')+(e[0]=='calc'?`<a class="btn g" href="#calc" data-mode="${e[1]}" data-r="${e[2]||''}" data-cap="${e[3]||''}">Рассчитать</a>`:'')+(e[0]=='tel'?'<a class="btn" href="tel:2552">Позвонить 2552</a>':'')+(e[0]=='map'?'<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Алматы+пр.+Абая+10В">Открыть на карте</a>':'')+'<a class="btn g" href="https://nurbank.kz" target="_blank" rel="noopener">nurbank.kz</a>';
+ $('#sub').innerHTML=`<div class="wrap pg"><div class="bc"><a href="#top">Главная</a> / ${top} / ${t}</div><h1>${t}</h1><p class="lead">${lead}</p>${x}<div class="grid"><div class="card"><h3>Что важно</h3><ul>${pts.map(v=>`<li>${v}</li>`).join('')}</ul></div><div class="card"><h3>Как оформить</h3><p>Оставьте заявку — банк свяжется с вами. Точные условия — на nurbank.kz или по телефону 2552 (бесплатно, 24/7).</p></div></div><div class="acts">${acts}</div>${sib.filter(v=>kk(v)!=k).length?`<h2>Ещё в разделе</h2><div class="rel">${sib.filter(v=>kk(v)!=k).map(v=>`<a href="${hr(v)}" ${dm(v)}>${lb(v)}</a>`).join('')}</div>`:''}</div>`;
+ $('#home').classList.add('hide');$('#sub').classList.remove('hide');document.title=t+' — Нурбанк';scrollTo(0,0);reveal()}
+function route(){const h=location.hash;$$('.nd.open').forEach(n=>n.classList.remove('open'));
+ if(h.startsWith('#/'))return showSub(h.slice(2));
+ $('#home').classList.remove('hide');$('#sub').classList.add('hide');document.title='Нурбанк — универсальный банк с 1992 года';
+ const el=h.length>1&&document.getElementById(h.slice(1));if(el)setTimeout(()=>el.scrollIntoView(),30);else scrollTo(0,0);reveal()}
+addEventListener('hashchange',route);
+// 3D, появление, прогресс
+const fine=matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches,T='.tilt,.grid>.card,.q';
+if(fine){document.addEventListener('pointermove',e=>{const t=e.target.closest&&e.target.closest(T);if(!t)return;const r=t.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height,k=t.classList.contains('vc')?22:7;t.style.setProperty('--rx',((.5-py)*k)+'deg');t.style.setProperty('--ry',((px-.5)*k)+'deg');t.style.setProperty('--mx',px*100+'%');t.style.setProperty('--my',py*100+'%')});
+ document.addEventListener('pointerout',e=>{const t=e.target.closest&&e.target.closest(T);if(t&&!t.contains(e.relatedTarget)){t.style.setProperty('--rx','0deg');t.style.setProperty('--ry','0deg')}})}
+const rio=new IntersectionObserver(es=>es.forEach(v=>{if(v.isIntersecting){v.target.classList.add('in');rio.unobserve(v.target)}}),{threshold:.1});
+function reveal(){$$('.card,.q,.cw,section h2,.stats').forEach(el=>{if(el.classList.contains('rv'))return;el.classList.add('rv');el.style.setProperty('--d',Math.min([...el.parentNode.children].indexOf(el),5)*.08+'s');rio.observe(el)})}
+addEventListener('scroll',()=>{const y=scrollY;$('#pb').style.transform=`scaleX(${y/Math.max(1,document.documentElement.scrollHeight-innerHeight)})`;if(y<900)$('#top').style.setProperty('--sy',y)},{passive:true});
+route();
+</script>
+</body>
+</html>
